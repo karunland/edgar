@@ -1,38 +1,65 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #0B0C10;
+  color: #F8F8F2;
 }
 
-.App-link {
-  color: #61dafb;
+/* Desktop'ta scrollbar stilleri */
+@media (min-width: 769px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1A1A1A;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #8B0000;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #A00000;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Mobilde scroll gizle */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+  
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+}
+
+/* Audio player custom styles */
+.rhap_container {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.rhap_main-controls-button {
+  color: #8B0000 !important;
+}
+
+.rhap_progress-filled {
+  background-color: #8B0000 !important;
+}
+
+.rhap_progress-indicator {
+  background-color: #8B0000 !important;
+}
+
+.rhap_time {
+  color: #A9A9A9 !important;
+}
+
+.rhap_volume-controls {
+  color: #8B0000 !important;
 }

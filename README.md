@@ -1,70 +1,146 @@
-# Getting Started with Create React App
+# Edgar Allan Poe – Biography Website (React + Tailwind + ShadCN UI)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> A dark, gothic, mobile-first React website to honor the legacy of Edgar Allan Poe. Includes biography, timeline, works, quote animations, audio player and photo gallery. 
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ⚙️ Stack Overview
 
-### `npm start`
+| Feature              | Tech / Library           |
+|----------------------|--------------------------|
+| UI Kit               | [ShadCN UI](https://ui.shadcn.com) |
+| Styling              | Tailwind CSS             |
+| Animations           | Framer Motion / Tailwind transitions |
+| Audio Player         | `react-h5-audio-player`  |
+| Icons                | Lucide / Phosphor icons  |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📱 Mobile-First UI Design
 
-### `npm test`
+All sections fit to screen height and scroll one-by-one vertically on touch devices using scroll-snap.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Sections:
 
-### `npm run build`
+1. **Header** – Name, subtitle, animated intro
+2. **About** – Short biography + portrait(photos slide, only show one at time, other ones looks small, like gets smaller by width)
+3. **Timeline** – Milestones in Poe’s life
+4. **Works** – Cards with famous works, quotes in modals
+5. **Audio** – MP3 player for 2-3 audio tracks (only one plays at a time)
+6. **Gallery** – Vintage-style photos in lightbox
+7. **Quotes** – Rotating gothic quotes
+8. **Footer** – Simple ending message
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🎨 Theme & Typography
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🖤 Colors
 
-### `npm run eject`
+| Role           | Hex        | Description         |
+|----------------|------------|---------------------|
+| Background     | `#0B0C10`  | Very dark gray/black |
+| Text (main)    | `#F8F8F2`  | Soft white          |
+| Accent         | `#8B0000`  | Blood red / gothic  |
+| Secondary Text | `#A9A9A9`  | Muted gray          |
+| Hover / Border | `#1A1A1A`  | Subtle black shade  |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### ✍️ Fonts
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+// tailwind.config.js
+fontFamily: {
+  serif: ['"EB Garamond"', 'serif'],
+  gothic: ['"Cinzel"', 'serif'],
+},
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Use `Cinzel` or `Playfair Display` for headers and `EB Garamond` for body text.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🎧 Audio Functionality
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Use `react-h5-audio-player`
+- Limit to **1 active track at a time**
+- When a new track starts, others are paused via `useRef()` or global state (e.g. Zustand or Context API)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🎬 Animations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Use `Framer Motion` for:
+  - Section fade-ins
+  - Quote transitions
+- Tailwind’s built-in transition classes also apply (`transition-opacity`, `duration-700`, etc.)
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🧩 Scroll-Snap Setup
 
-### Making a Progressive Web App
+```css
+/* Example for vertical scroll */
+.scroll-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+.section {
+  scroll-snap-align: start;
+  height: 100vh;
+}
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🗂 Recommended Folder Structure
 
-### Deployment
+```
+src/
+│
+├── components/
+│   ├── Header.tsx
+│   ├── Timeline.tsx
+│   ├── Works.tsx
+│   ├── AudioPlayer.tsx
+│   ├── Quotes.tsx
+│   ├── Gallery.tsx
+│   └── Footer.tsx
+│
+├── assets/
+│   ├── images/
+│   └── audio/
+│
+├── App.tsx
+└── index.tsx
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🚀 Quick Start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npx create-react-app poe-biography --template typescript
+
+cd poe-biography
+
+npm install tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+npm install @shadcn/ui react-h5-audio-player framer-motion lucide-react
+```
+
+Set up Tailwind in `index.css`, configure `tailwind.config.js`, then start building components.
+
+---
+
+## 📸 Inspiration
+
+- [brittanychiang.com](https://brittanychiang.com/)
+- [timcchang.com](https://timcchang.com/)
+- Poe Society Archive
+
+---
+
+> "All that we see or seem is but a dream within a dream." — Edgar Allan Poe
