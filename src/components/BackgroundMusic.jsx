@@ -8,6 +8,7 @@ const BackgroundMusic = ({ shouldPlayMusic }) => {
   const [volume, setVolume] = useState(0.3);
   const [isMuted, setIsMuted] = useState(false);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -19,8 +20,9 @@ const BackgroundMusic = ({ shouldPlayMusic }) => {
   }, [volume]);
 
   useEffect(() => {
-    // Start music if user chose to listen
-    if (shouldPlayMusic && audioRef.current && !isPlaying) {
+    // Start music if user chose to listen and hasn't started yet
+    if (shouldPlayMusic && audioRef.current && !hasStarted) {
+      setHasStarted(true);
       const startMusic = () => {
         audioRef.current.play().then(() => {
           setIsPlaying(true);
@@ -47,7 +49,7 @@ const BackgroundMusic = ({ shouldPlayMusic }) => {
       // Try to start immediately
       startMusic();
     }
-  }, [shouldPlayMusic, isPlaying]);
+  }, [shouldPlayMusic, hasStarted]);
 
   useEffect(() => {
     if (audioRef.current) {
