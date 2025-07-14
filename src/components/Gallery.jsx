@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Image } from 'lucide-react';
 import Poe1 from '../assets/portre1.avif';
@@ -10,7 +10,6 @@ import handWritter from '../assets/handwrittin.webp';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const images = [
     {
@@ -56,14 +55,6 @@ const Gallery = () => {
       description: 'Poe\'s grave and memorial'
     }
   ];
-
-  // Otomatik geçiş için timer
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, 10000); // 10 saniye
-    return () => clearInterval(timer);
-  }, [images.length]);
 
   const nextImage = () => {
     if (selectedImage) {
