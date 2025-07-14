@@ -90,34 +90,49 @@ const Works = () => {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="card hover:scale-105 transition-transform duration-300 cursor-pointer"
+              className="card hover:scale-105 transition-all duration-300 cursor-pointer group relative overflow-hidden"
               onClick={() => setSelectedWork(work)}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <BookOpen className="w-6 h-6 text-accent" />
-                <div>
-                  <span className="text-accent text-sm font-semibold">{work.type}</span>
-                  <span className="text-secondary text-sm ml-2">• {work.year}</span>
+              {/* Hover glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Animated border */}
+              <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-accent/30 transition-all duration-300"></div>
+              
+              {/* Click indicator */}
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center">
+                  <BookOpen className="w-4 h-4 text-accent" />
                 </div>
               </div>
-              
-              <h3 className="font-gothic text-xl font-semibold text-text mb-3">
-                {work.title}
-              </h3>
-              
-              <p className="text-secondary text-sm leading-relaxed mb-4">
-                {work.description}
-              </p>
-              
-              <div className="flex items-center gap-2 text-accent/70">
-                <Quote className="w-4 h-4" />
-                <span className="text-sm italic">{work.quote}</span>
-              </div>
-              
-              <div className="mt-4">
-                <span className="inline-block bg-accent/20 text-accent text-xs px-3 py-1 rounded-full">
-                  {work.genre}
-                </span>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <BookOpen className="w-6 h-6 text-accent group-hover:scale-110 transition-transform duration-300" />
+                  <div>
+                    <span className="text-accent text-base font-semibold">{work.type}</span>
+                    <span className="text-secondary text-base ml-2">• {work.year}</span>
+                  </div>
+                </div>
+                
+                <h3 className="font-gothic text-2xl font-semibold text-text mb-3 group-hover:text-accent transition-colors duration-300">
+                  {work.title}
+                </h3>
+                
+                <p className="text-secondary text-base leading-relaxed mb-4 group-hover:text-text/90 transition-colors duration-300">
+                  {work.description}
+                </p>
+                
+                <div className="flex items-center gap-2 text-accent/70 group-hover:text-accent transition-colors duration-300">
+                  <Quote className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-base italic">{work.quote}</span>
+                </div>
+                
+                <div className="mt-4">
+                  <span className="inline-block bg-accent/20 text-accent text-sm px-3 py-1 rounded-full group-hover:bg-accent/30 group-hover:scale-105 transition-all duration-300">
+                    {work.genre}
+                  </span>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -158,19 +173,19 @@ const Works = () => {
                 </div>
                 
                 <div className="space-y-4">
-                  <p className="text-secondary leading-relaxed">
+                  <p className="text-secondary leading-relaxed text-lg">
                     {selectedWork.description}
                   </p>
                   
                   <div className="border-l-4 border-accent pl-4 py-2">
-                    <p className="text-text italic text-lg leading-relaxed">
+                    <p className="text-text italic text-xl leading-relaxed">
                       "{selectedWork.fullQuote}"
                     </p>
                   </div>
                   
                   <div className="flex items-center gap-2">
-                    <span className="text-accent font-semibold">Genre:</span>
-                    <span className="text-secondary">{selectedWork.genre}</span>
+                    <span className="text-accent font-semibold text-lg">Genre:</span>
+                    <span className="text-secondary text-lg">{selectedWork.genre}</span>
                   </div>
                 </div>
               </motion.div>
