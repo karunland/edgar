@@ -7,6 +7,33 @@ import 'react-h5-audio-player/lib/styles.css';
 const AudioSection = () => {
   const audioRefs = useRef({});
 
+  // Mobil tarayıcılar için audio context'i başlat
+  React.useEffect(() => {
+    const initAudioContext = () => {
+      if (typeof window !== 'undefined' && window.AudioContext) {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+      }
+    };
+
+    // Kullanıcı etkileşimi sonrası audio context'i başlat
+    const handleUserInteraction = () => {
+      initAudioContext();
+      document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+    };
+
+    document.addEventListener('touchstart', handleUserInteraction);
+    document.addEventListener('click', handleUserInteraction);
+
+    return () => {
+      document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+    };
+  }, []);
+
   const tracks = [
     {
       id: 1,
@@ -88,7 +115,14 @@ const AudioSection = () => {
                   }}
                   src={track.src}
                   onPlay={() => handlePlay(track.id)}
-                  showJumpControls={false}
+                  onCanPlay={() => {
+                    // Mobil tarayıcılar için audio hazır olduğunda
+                    if (audioRefs.current[track.id]?.audio?.current) {
+                      audioRefs.current[track.id].audio.current.setAttribute('playsinline', '');
+                      audioRefs.current[track.id].audio.current.setAttribute('webkit-playsinline', '');
+                    }
+                  }}
+                  showJumpControls={true}
                   showFilledProgress={true}
                   customProgressBarSection={[
                     'PROGRESS_BAR',
@@ -99,6 +133,12 @@ const AudioSection = () => {
                     'MAIN_CONTROLS',
                     'VOLUME_CONTROLS',
                   ]}
+                  preload="metadata"
+                  autoPlayAfterSrcChange={false}
+                  showDownloadProgress={true}
+                  showFilledVolume={true}
+                  defaultCurrentTime="0:00"
+                  defaultDuration="0:00"
                   style={{
                     backgroundColor: 'transparent',
                     boxShadow: 'none',
@@ -126,10 +166,13 @@ const AudioSection = () => {
           background: transparent;
           box-shadow: none;
           padding: 0;
+          border-radius: 8px;
         }
         
         .custom-audio-player :global(.rhap_main-controls-button) {
           color: #8B0000;
+          width: 40px;
+          height: 40px;
         }
         
         .custom-audio-player :global(.rhap_progress-filled) {
@@ -138,14 +181,70 @@ const AudioSection = () => {
         
         .custom-audio-player :global(.rhap_progress-indicator) {
           background-color: #8B0000;
+          width: 16px;
+          height: 16px;
+        }
+        
+        .custom-audio-player :global(.rhap_progress-bar) {
+          height: 6px;
+          border-radius: 3px;
         }
         
         .custom-audio-player :global(.rhap_time) {
           color: #A9A9A9;
+          font-size: 14px;
         }
         
         .custom-audio-player :global(.rhap_volume-controls) {
           color: #8B0000;
+        }
+        
+        .custom-audio-player :global(.rhap_volume-bar) {
+          height: 4px;
+          border-radius: 2px;
+        }
+        
+        .custom-audio-player :global(.rhap_volume-indicator) {
+          width: 12px;
+          height: 12px;
+        }
+        
+        /* Mobil için özel stiller */
+        @media (max-width: 768px) {
+          .custom-audio-player :global(.rhap_container) {
+            padding: 8px;
+          }
+          
+          .custom-audio-player :global(.rhap_main-controls-button) {
+            width: 36px;
+            height: 36px;
+          }
+          
+          .custom-audio-player :global(.rhap_progress-indicator) {
+            width: 14px;
+            height: 14px;
+          }
+          
+          .custom-audio-player :global(.rhap_time) {
+            font-size: 12px;
+          }
+          
+          .custom-audio-player :global(.rhap_volume-controls) {
+            display: flex !important;
+          }
+        }
+        
+        /* Touch cihazlar için daha büyük dokunma alanları */
+        @media (hover: none) and (pointer: coarse) {
+          .custom-audio-player :global(.rhap_main-controls-button) {
+            min-width: 44px;
+            min-height: 44px;
+          }
+          
+          .custom-audio-player :global(.rhap_progress-indicator) {
+            min-width: 20px;
+            min-height: 20px;
+          }
         }
       `}</style>
     </section>
