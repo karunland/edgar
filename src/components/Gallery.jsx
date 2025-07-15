@@ -1,63 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Image } from 'lucide-react';
+import Poe1 from '../assets/portre1.avif';
+import cementery from '../assets/cementery.jpg';
+import gothicManor from '../assets/gothicManor.avif';
+import nevermore from '../assets/nevermore.webp';
+import houseOfUsher from '../assets/home.webp';
+import handWritter from '../assets/handwrittin.webp';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const images = [
     {
       id: 1,
-      src: 'https://placehold.co/600x400/8B0000/FFFFFF?text=Poe+Portrait+1',
+      src: Poe1,
       alt: 'Edgar Allan Poe Portrait',
       title: 'The Master Himself',
       description: 'A haunting portrait of the literary genius'
     },
     {
       id: 2,
-      src: 'https://placehold.co/600x400/1A1A1A/FFFFFF?text=Gothic+Manor',
+      src: gothicManor,
       alt: 'Gothic Manor',
       title: 'The House of Usher',
       description: 'Inspired by Poe\'s gothic masterpiece'
     },
     {
       id: 3,
-      src: 'https://placehold.co/600x400/0B0C10/FFFFFF?text=Raven+Silhouette',
+      src: nevermore,
       alt: 'Raven Silhouette',
       title: 'Nevermore',
       description: 'The iconic raven from Poe\'s most famous poem'
     },
     {
       id: 4,
-      src: 'https://placehold.co/600x400/8B0000/FFFFFF?text=Manuscript',
+      src: handWritter,
       alt: 'Old Manuscript',
       title: 'Original Manuscript',
       description: 'Poe\'s handwritten notes and drafts'
     },
     {
       id: 5,
-      src: 'https://placehold.co/600x400/1A1A1A/FFFFFF?text=Study+Room',
+      src: houseOfUsher,
       alt: 'Victorian Study',
       title: 'The Study',
       description: 'Where Poe crafted his dark tales'
     },
     {
       id: 6,
-      src: 'https://placehold.co/600x400/0B0C10/FFFFFF?text=Cemetery',
+      src: cementery,
       alt: 'Cemetery Scene',
       title: 'The Final Resting Place',
       description: 'Poe\'s grave and memorial'
     }
   ];
-
-  // Otomatik geçiş için timer
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, 10000); // 10 saniye
-    return () => clearInterval(timer);
-  }, [images.length]);
 
   const nextImage = () => {
     if (selectedImage) {

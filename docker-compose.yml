@@ -4,6 +4,6 @@ services:
   poe-biography:
     build: .
     ports:
-      - "3000:80"
+      - "3001:80"
     container_name: poe-biography-app
     restart: unless-stopped 
