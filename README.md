@@ -31,33 +31,6 @@ All sections fit to screen height and scroll one-by-one vertically on touch devi
 7. **Quotes** – Rotating gothic quotes
 8. **Footer** – Simple ending message
 
----
-
-## 🎨 Theme & Typography
-
-### 🖤 Colors
-
-| Role           | Hex        | Description         |
-|----------------|------------|---------------------|
-| Background     | `#0B0C10`  | Very dark gray/black |
-| Text (main)    | `#F8F8F2`  | Soft white          |
-| Accent         | `#8B0000`  | Blood red / gothic  |
-| Secondary Text | `#A9A9A9`  | Muted gray          |
-| Hover / Border | `#1A1A1A`  | Subtle black shade  |
-
-### ✍️ Fonts
-
-```js
-// tailwind.config.js
-fontFamily: {
-  serif: ['"EB Garamond"', 'serif'],
-  gothic: ['"Cinzel"', 'serif'],
-},
-```
-
-Use `Cinzel` or `Playfair Display` for headers and `EB Garamond` for body text.
-
----
 
 ## 🎧 Audio Functionality
 
@@ -74,73 +47,5 @@ Use `Cinzel` or `Playfair Display` for headers and `EB Garamond` for body text.
   - Quote transitions
 - Tailwind’s built-in transition classes also apply (`transition-opacity`, `duration-700`, etc.)
 
----
-
-## 🧩 Scroll-Snap Setup
-
-```css
-/* Example for vertical scroll */
-.scroll-container {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  height: 100vh;
-}
-
-.section {
-  scroll-snap-align: start;
-  height: 100vh;
-}
-```
-
----
-
-## 🗂 Recommended Folder Structure
-
-```
-src/
-│
-├── components/
-│   ├── Header.tsx
-│   ├── Timeline.tsx
-│   ├── Works.tsx
-│   ├── AudioPlayer.tsx
-│   ├── Quotes.tsx
-│   ├── Gallery.tsx
-│   └── Footer.tsx
-│
-├── assets/
-│   ├── images/
-│   └── audio/
-│
-├── App.tsx
-└── index.tsx
-```
-
----
-
-## 🚀 Quick Start
-
-```bash
-npx create-react-app poe-biography --template typescript
-
-cd poe-biography
-
-npm install tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-
-npm install @shadcn/ui react-h5-audio-player framer-motion lucide-react
-```
-
-Set up Tailwind in `index.css`, configure `tailwind.config.js`, then start building components.
-
----
-
-## 📸 Inspiration
-
-- [brittanychiang.com](https://brittanychiang.com/)
-- [timcchang.com](https://timcchang.com/)
-- Poe Society Archive
-
----
 
 > "All that we see or seem is but a dream within a dream." — Edgar Allan Poe
