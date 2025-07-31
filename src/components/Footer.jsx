@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="flex justify-center items-center gap-2 mb-6">
             <BookOpen className="w-6 h-6 text-accent" />
             <h3 className="font-gothic text-2xl font-semibold text-text">
-              Edgar Allan Poe
+              Edgar Allan Poe (Franke)
             </h3>
             <Moon className="w-6 h-6 text-accent" />
           </div>
@@ -32,9 +32,21 @@ const Footer = () => {
             <span>1849</span>
           </div>
           
-          <div className="border-t border-accent/20 pt-6">
-            <p className="text-secondary/70 text-sm">
-              © 2024 Edgar Allan Poe Tribute. Created with passion for gothic literature.
+          <div className="border-t border-accent/20 pt-6 space-y-3">
+            <p className="text-secondary/70 text-base">
+              © {new Date().getFullYear()} Edgar Franke Tribute. Made with ❤️{' '}
+              <span 
+                className="blur-sm hover:blur-none transition-all duration-300 cursor-help"
+                title="Hover to reveal message"
+              >
+                love and passion for those who we love but can't be with - Edgar
+              </span>.
+            </p>
+            <p className="text-secondary/60 text-sm">
+              Developed by <span className="text-accent font-semibold">Harun Korkmaz</span> • 
+              <a href="mailto:contact@hkorkmaz.com" className="text-accent hover:text-accent/80 transition-colors ml-1">
+                contact@hkorkmaz.com
+              </a>
             </p>
           </div>
         </motion.div>
